@@ -2,14 +2,17 @@ def recall_password(cipher_grille, ciphered_password):
     encrypted = ''
     index = 0
     index2 = 0
-    for i, row in enumerate(cipher_grille):
-        if row.count('X') == 1:
-            index = row.index('X')
-            encrypted += ciphered_password[i][index]
-        if row.count('X') == 2:
-            index = row.index('X')
-            index2 = row[index:].index('X') + index #Ovdje si stao, treba skontat drugi index
-            encrypted += ciphered_password[i][index] + ciphered_password[i][index2]
+    for n in range(4):
+        for i, row in enumerate(cipher_grille):
+            if row.count('X') == 1:
+                index = row.index('X')
+                encrypted += ciphered_password[i][index]
+            if row.count('X') == 2:
+                index = row.index('X')
+                help_index = index + 1
+                index2 = row[help_index:].index('X') + index + 1
+                encrypted += ciphered_password[i][index] + ciphered_password[i][index2]
+        cipher_grille = zip(*cipher_grille)
 
     return encrypted
 
